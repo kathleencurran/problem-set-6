@@ -10,6 +10,7 @@ const WordList = (props) => {
     if (typeof property !== "function") {
       const propName = property;
       property = (obj) => obj[propName];
+      console.log(property);
     }
 
     const groupedObjects = new Map();
