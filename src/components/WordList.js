@@ -7,7 +7,7 @@ const WordList = (props) => {
   const [savedWordList, setSavedWordList] = useState([]);
   const [groupedWordList, setGroupedWordList] = useState([]);
 
-  // console.log("saved", savedWordList, savedWordList.length);
+
   const groupBy = (objects, property) => {
     if (typeof property !== "function") {
       const propName = property;
@@ -25,7 +25,6 @@ const WordList = (props) => {
     }
 
     const result = {};
-    const resultList = [];
     for (const key of Array.from(groupedObjects.keys()).sort()) {
       result[key] = groupedObjects.get(key);
     }
@@ -35,29 +34,16 @@ const WordList = (props) => {
 
   useEffect(() => {
     console.log("fired");
-
     setGroupedWordList(groupBy(datamuseResults, "numSyllables"));
   }, [datamuseResults]);
 
-  // groupBy(datamuseResults, "numSyllables");
-  // setThrowaway(groupBy(datamuseResults, "numSyllables"));
-  // console.log(typeof datamuseResults, datamuseResults);
-  console.log(typeof groupedWordList, groupedWordList);
-
   const helper = () => {
     const resultsWithSyllables = [];
+    console.log("initial helper", resultsWithSyllables);
     for (const [key, value] of Object.entries(groupedWordList)) {
       resultsWithSyllables.push(<h3 key={key}>Syllables: {key}</h3>);
 
-      // console.log("HELLO");
-
       for (const [wordKey, wordValue] of Object.entries(value)) {
-        console.log(wordValue.word);
-        // value.map((item, index) => {
-        // resultsWithSyllables.push(wordValue.word);
-
-        // return (
-        //   <li key={index}>{item.word}</li>
         resultsWithSyllables.push(
           <WordItem
             key={wordKey}
@@ -65,16 +51,10 @@ const WordList = (props) => {
             setSavedWordList={setSavedWordList}
           />
         );
-
-        // );
-        // );
-        // });
       }
     }
     return resultsWithSyllables;
   };
-
-  // helper();
 
   return (
     <main className="container">
@@ -87,12 +67,12 @@ const WordList = (props) => {
       )}
       {isRhyme ? (
         <>
-          <h2>Words with a meaning similar to {wordInput} </h2>
+          <h2> Words that rhyme with: {wordInput}</h2>
           <ul className="row">{helper()}</ul>
         </>
       ) : (
         <>
-          <h2> Words that rhyme with: {wordInput}</h2>
+          <h2>Words with a meaning similar to {wordInput} </h2>
           <ul className="row">
             {datamuseResults.map((words, index) => (
               <WordItem

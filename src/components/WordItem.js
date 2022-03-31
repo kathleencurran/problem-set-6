@@ -9,8 +9,6 @@ const WordItem = (props) => {
     // console.log(savedWordList);
   };
 
-  // console.log(savedWordList);
-  // console.log(word);
   return (
     <>
       <li>

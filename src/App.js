@@ -9,20 +9,7 @@ function App() {
   const [wordInput, setWordInput] = useState("");
   const [savedWordList, setSavedWordList] = useState([]);
   const [isRhyme, setIsRhyme] = useState(false);
-
-  // const [url, setUrl] = useState("");
-
-  // useEffect(() => {
-  //   fetch("https://api.datamuse.com/words?rel_rhy=hello")
-  //     .then((response) => {
-  //       return response.json();
-  //     })
-  //     .then((json) => setDatamuseResults(Object.values(json)));
-  // }, []);
-
-  // console.log("datamuse", datamuseResults);
-  // console.log("input", wordInput);
-  // console.log(isRhymeListShown);
+  const [listOfWords, setListOfWords] = useState([]);
 
   return (
     <div className="App">
@@ -34,12 +21,14 @@ function App() {
           setDatamuseResults={setDatamuseResults}
           wordInput={wordInput}
           setIsRhyme={setIsRhyme}
+          setListOfWords={setListOfWords}
         />
 
         <WordList
           datamuseResults={datamuseResults}
           wordInput={wordInput}
           isRhyme={isRhyme}
+          listOfWords={listOfWords}
         />
       </main>
     </div>

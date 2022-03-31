@@ -8,12 +8,11 @@ const InputBar = (props) => {
   const { setWordInput, setDatamuseResults, wordInput, setIsRhyme } = props;
   const inputRef = useRef(null);
 
-  const [synonymClicked, setSynonymClicked] = useState(false);
-  const [rhymeClicked, setRhymeClicked] = useState(false);
-
   const [rhymeList, setRhymeList] = useState([]);
 
   const showRhymeList = (e) => {
+    setDatamuseResults([]);
+    
     setIsRhyme(true);
     console.log("run");
     fetch(`https://api.datamuse.com/words?rel_rhy=${wordInput}`)
@@ -24,11 +23,11 @@ const InputBar = (props) => {
 
     console.log(inputRef.current.value);
     inputRef.current.value = "";
-
-    // setWordInput("");
   };
 
   const showSynonymList = () => {
+    setDatamuseResults([]);
+
     setIsRhyme(false);
 
     fetch(`https://api.datamuse.com/words?ml=${wordInput}`)
